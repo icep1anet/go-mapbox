@@ -66,7 +66,7 @@ import (
 var forwardOpts geocode.ForwardRequestOpts
 forwardOpts.Limit = 1
 
-place := "2 lincoln memorial circle nw"
+forwardOpts.Place := "2 lincoln memorial circle nw"
 
 forward, err := mapBox.Geocode.Forward(place, &forwardOpts)
 
@@ -75,9 +75,10 @@ forward, err := mapBox.Geocode.Forward(place, &forwardOpts)
 var reverseOpts geocode.ReverseRequestOpts
 reverseOpts.Limit = 1
 
-loc := &base.Location{72.438939, 34.074122}
+reqOpt.Latitude = 34.074122
+reqOpt.Longitude = 72.438939
 
-reverse, err := mapBox.Geocode.Reverse(loc, &reverseOpts)
+reverse, err := mapBox.Geocode.Reverse(&reverseOpts)
 
 ```
 

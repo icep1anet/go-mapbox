@@ -11,17 +11,15 @@ package geocode
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/google/go-querystring/query"
 	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 const (
-	apiName          = "geocoding"
-	apiVersion       = "v6"
-	apiMode          = "mapbox.places"
-	apiModePermanent = "mapbox.places-permanent"
+	apiBaseName          = "search"
+	apiName              = "geocode"
+	apiVersion           = "v6"
 )
 
 // Type defines geocode location response types
@@ -60,14 +58,15 @@ func NewGeocode(base *base.Base) *Geocode {
 
 // ForwardRequestOpts request options fo forward geocoding
 type ForwardRequestOpts struct {
+	Place 		 string           `url:"q"`
+	Permanent 	 bool             `url:"permanent,omitempty"`
+	Autocomplete bool             `url:"autocomplete,omitempty"`
+	Language     string           `url:"language,omitempty"`
 	Country      string           `url:"country,omitempty"`
 	Proximity    []float64        `url:"proximity,omitempty"`
 	Types        []Type           `url:"types,omitempty"`
-	Autocomplete bool             `url:"autocomplete,omitempty"`
 	BBox         base.BoundingBox `url:"bbox,omitempty"`
 	Limit        uint             `url:"limit,omitempty"`
-	FuzzyMatch   bool             `url:"fuzzyMatch,omitempty"`
-	Routing      bool             `url:"routing,omitempty"`
 }
 
 // ForwardResponse is the response from a forward geocode lookup
@@ -78,8 +77,7 @@ type ForwardResponse struct {
 
 // Forward geocode lookup
 // Finds locations from a place name
-func (g *Geocode) Forward(place string, req *ForwardRequestOpts, permanent ...bool) (*ForwardResponse, error) {
-
+func (g *Geocode) Forward(req *ForwardRequestOpts) (*ForwardResponse, error) {
 	v, err := query.Values(req)
 	if err != nil {
 		return nil, err
@@ -87,20 +85,21 @@ func (g *Geocode) Forward(place string, req *ForwardRequestOpts, permanent ...bo
 
 	resp := ForwardResponse{}
 
-	queryString := strings.Replace(place, " ", "+", -1)
-	if len(permanent) > 0 && permanent[0] {
-		err = g.base.Query(apiName, apiVersion, apiModePermanent, fmt.Sprintf("%s.json", queryString), &v, &resp)
-	} else {
-		err = g.base.Query(apiName, apiVersion, apiMode, fmt.Sprintf("%s.json", queryString), &v, &resp)
-	}
+	// https://api.mapbox.com/search/geocode/v6/forward?q=<queryString>
+	err = g.base.QueryBase(fmt.Sprintf("%s/%s/%s/forward", apiBaseName, apiName, apiVersion), &v, &resp)
 
 	return &resp, err
 }
 
 // ReverseRequestOpts request options fo reverse geocoding
 type ReverseRequestOpts struct {
-	Types []Type
-	Limit uint
+	Longitude float64 `url:"longitude"`
+	Latitude  float64 `url:"latitude"`
+	Language  string  `url:"language,omitempty"`
+	Country   string  `url:"country,omitempty"`
+	Permanent bool    `url:"permanent,omitempty"`
+	Types     []Type  `url:"types,omitempty"`
+	Limit     uint    `url:"limit,omitempty"`
 }
 
 // ReverseResponse is the response to a reverse geocode request
@@ -111,8 +110,7 @@ type ReverseResponse struct {
 
 // Reverse geocode lookup
 // Finds place names from a location
-func (g *Geocode) Reverse(loc *base.Location, req *ReverseRequestOpts) (*ReverseResponse, error) {
-
+func (g *Geocode) Reverse(req *ReverseRequestOpts) (*ReverseResponse, error) {
 	v, err := query.Values(req)
 	if err != nil {
 		return nil, err
@@ -120,9 +118,8 @@ func (g *Geocode) Reverse(loc *base.Location, req *ReverseRequestOpts) (*Reverse
 
 	resp := ReverseResponse{}
 
-	queryString := fmt.Sprintf("%f,%f.json", loc.Longitude, loc.Latitude)
-
-	err = g.base.Query(apiName, apiVersion, apiMode, queryString, &v, &resp)
+	// https://api.mapbox.com/search/geocode/v6/reverse?longitude={longitude}&latitude={latitude}
+	err = g.base.QueryBase(fmt.Sprintf("%s/%s/%s/reverse", apiBaseName, apiName, apiVersion), &v, &resp)
 
 	return &resp, err
 }

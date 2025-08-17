@@ -35,9 +35,9 @@ func TestMaps(t *testing.T) {
 	var forwardOpts geocode.ForwardRequestOpts
 	forwardOpts.Limit = 1
 
-	place := "2 lincoln memorial circle nw"
+	forwardOpts.Place = "2 lincoln memorial circle nw"
 
-	_, err = mapBox.Geocode.Forward(place, &forwardOpts)
+	_, err = mapBox.Geocode.Forward(&forwardOpts)
 	if err != nil {
 		t.Error(err)
 	}
@@ -46,9 +46,10 @@ func TestMaps(t *testing.T) {
 	var reverseOpts geocode.ReverseRequestOpts
 	reverseOpts.Limit = 1
 
-	loc := &base.Location{72.438939, 34.074122}
+	reverseOpts.Latitude = 34.074122
+	reverseOpts.Longitude = 72.438939
 
-	_, err = mapBox.Geocode.Reverse(loc, &reverseOpts)
+	_, err = mapBox.Geocode.Reverse(&reverseOpts)
 	if err != nil {
 		t.Error(err)
 	}

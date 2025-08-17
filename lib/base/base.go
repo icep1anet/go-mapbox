@@ -13,7 +13,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
+	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -73,6 +74,7 @@ func (b *Base) QueryRequest(query string, v *url.Values) (*http.Response, error)
 	}
 	request.URL.RawQuery = v.Encode()
 
+	log.Printf("Request URL: %s\n", request.URL.String())
 	// Create client instance
 	client := &http.Client{}
 
@@ -109,7 +111,7 @@ func (b *Base) QueryBase(query string, v *url.Values, inst interface{}) error {
 	defer resp.Body.Close()
 
 	// Read body into buffer
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
