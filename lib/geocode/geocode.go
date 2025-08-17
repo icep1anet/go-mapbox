@@ -19,7 +19,7 @@ import (
 
 const (
 	apiName          = "geocoding"
-	apiVersion       = "v5"
+	apiVersion       = "v6"
 	apiMode          = "mapbox.places"
 	apiModePermanent = "mapbox.places-permanent"
 )

@@ -16,12 +16,12 @@ Because Travis-CI does not expose the build environment to untrusted branches (i
 
 ### Modules
 
-- [X] Geocoding
-- [X] Directions
-- [X] Directions Matrix
-- [X] Map Matching
+- [X] Geocoding V6
+- [X] Directions V5
+- [X] Directions Matrix V1
+- [X] Map Matching V5
 - [ ] Styles
-- [X] Maps
+- [X] Maps V4
 - [ ] Static
 - [ ] Datasets
 
@@ -54,6 +54,8 @@ img, err := mapBox.Maps.GetTiles(maps.MapIDSatellite, 1, 0, 0, maps.MapFormatJpg
 ```
 
 ### Geocoding
+
+This library uses geocoding-v6 API
 
 ```go
 import (
