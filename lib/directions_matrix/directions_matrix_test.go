@@ -12,10 +12,8 @@ package directionsmatrix
 import (
 	"os"
 	"testing"
-)
 
-import (
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 func TestDirectionsMatrix(t *testing.T) {

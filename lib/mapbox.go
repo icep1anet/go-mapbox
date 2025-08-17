@@ -10,12 +10,12 @@
 package mapbox
 
 import (
-	"github.com/ryankurte/go-mapbox/lib/base"
-	"github.com/ryankurte/go-mapbox/lib/directions"
-	"github.com/ryankurte/go-mapbox/lib/directions_matrix"
-	"github.com/ryankurte/go-mapbox/lib/geocode"
-	"github.com/ryankurte/go-mapbox/lib/map_matching"
-	"github.com/ryankurte/go-mapbox/lib/maps"
+	"github.com/icep1anet/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/directions"
+	directionsmatrix "github.com/icep1anet/go-mapbox/lib/directions_matrix"
+	"github.com/icep1anet/go-mapbox/lib/geocode"
+	mapmatching "github.com/icep1anet/go-mapbox/lib/map_matching"
+	"github.com/icep1anet/go-mapbox/lib/maps"
 )
 
 // Mapbox API Wrapper structure

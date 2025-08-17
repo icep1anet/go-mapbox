@@ -15,7 +15,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 func TestMapMatching(t *testing.T) {

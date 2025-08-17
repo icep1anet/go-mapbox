@@ -20,8 +20,9 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/ryankurte/go-mapbox/lib/base"
 	"sync"
+
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 const (
