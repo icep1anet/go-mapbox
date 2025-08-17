@@ -14,12 +14,12 @@ import (
 	"strings"
 
 	"github.com/google/go-querystring/query"
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 const (
 	apiName          = "geocoding"
-	apiVersion       = "v5"
+	apiVersion       = "v6"
 	apiMode          = "mapbox.places"
 	apiModePermanent = "mapbox.places-permanent"
 )

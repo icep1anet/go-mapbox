@@ -14,7 +14,7 @@ import (
 	"strings"
 
 	"github.com/google/go-querystring/query"
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 const (

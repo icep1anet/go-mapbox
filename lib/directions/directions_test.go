@@ -12,10 +12,8 @@ package directions
 import (
 	"os"
 	"testing"
-)
 
-import (
-	"github.com/ryankurte/go-mapbox/lib/base"
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 func TestDirections(t *testing.T) {

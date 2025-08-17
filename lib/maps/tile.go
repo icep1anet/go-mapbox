@@ -6,8 +6,9 @@ import (
 	"image/draw"
 	"math"
 
-	"github.com/ryankurte/go-mapbox/lib/base"
 	"image/color"
+
+	"github.com/icep1anet/go-mapbox/lib/base"
 )
 
 // Tile is a wrapper around an image that includes positioning data
