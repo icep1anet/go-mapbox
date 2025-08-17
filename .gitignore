@@ -5,3 +5,5 @@ setenv.sh
 *.svg
 *.json
 coverage.txt
+
+.env

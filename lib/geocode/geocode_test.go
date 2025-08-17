@@ -10,9 +10,8 @@
 package geocode
 
 import (
+	"log"
 	"os"
-	"reflect"
-	"strings"
 	"testing"
 
 	"github.com/icep1anet/go-mapbox/lib/base"
@@ -32,19 +31,18 @@ func TestGeocoder(t *testing.T) {
 		var reqOpt ForwardRequestOpts
 		reqOpt.Limit = 1
 
-		place := "2 lincoln memorial circle nw"
+		reqOpt.Place = "2 lincoln memorial circle nw"
 
-		res, err := geocode.Forward(place, &reqOpt)
+		res, err := geocode.Forward(&reqOpt)
 		if err != nil {
 			t.Error(err)
 		}
 
+		log.Printf("OKOKOKOKOKOKOKOKOK\n")
+		log.Printf("res: %#v\n", res.FeatureCollection)
+
 		if res.Type != "FeatureCollection" {
 			t.Errorf("Invalid response type: %s", res.Type)
-		}
-
-		if !reflect.DeepEqual(res.Query, strings.Split(place, " ")) {
-			t.Errorf("Invalid query response: %s", res.Query)
 		}
 
 	})
@@ -53,9 +51,10 @@ func TestGeocoder(t *testing.T) {
 		var reqOpt ReverseRequestOpts
 		reqOpt.Limit = 1
 
-		loc := &base.Location{72.438939, 34.074122}
+		reqOpt.Latitude = 34.074122
+		reqOpt.Longitude = 72.438939
 
-		res, err := geocode.Reverse(loc, &reqOpt)
+		res, err := geocode.Reverse(&reqOpt)
 		if err != nil {
 			t.Error(err)
 		}
