@@ -38,9 +38,6 @@ func TestGeocoder(t *testing.T) {
 			t.Error(err)
 		}
 
-		log.Printf("OKOKOKOKOKOKOKOKOK\n")
-		log.Printf("res: %#v\n", res.FeatureCollection)
-
 		if res.Type != "FeatureCollection" {
 			t.Errorf("Invalid response type: %s", res.Type)
 		}

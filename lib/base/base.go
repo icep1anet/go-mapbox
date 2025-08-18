@@ -74,7 +74,6 @@ func (b *Base) QueryRequest(query string, v *url.Values) (*http.Response, error)
 	}
 	request.URL.RawQuery = v.Encode()
 
-	log.Printf("Request URL: %s\n", request.URL.String())
 	// Create client instance
 	client := &http.Client{}
 
