@@ -10,7 +10,6 @@
 package geocode
 
 import (
-	"log"
 	"os"
 	"testing"
 
